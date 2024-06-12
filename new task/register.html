@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="registration-form">
+    <label for="first-name">First Name:</label>
+    <input type="text" id="first-name" required><br><br>
+    <label for="last-name">Last Name:</label>
+    <input type="text" id="last-name" required><br><br>
+    <label for="birth-date">Birth Date:</label>
+    <input type="date" id="birth-date" required><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br><br>
+    <label for="confirm-email">Confirm Email:</label>
+    <input type="email" id="confirm-email" required><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" required><br><br>
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" required><br><br>
+    <label for="mobile-number">Mobile Number:</label>
+    <input type="tel" id="mobile-number" required><br><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <div id="error-messages"></div>
+
+  <script>
+    const form = document.getElementById('registration-form');
+    const errorMessages = document.getElementById('error-messages');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const birthDate = document.getElementById('birth-date').value;
+      const email = document.getElementById('email').value;
+      const confirmEmail = document.getElementById('confirm-email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const mobileNumber = document.getElementById('mobile-number').value;
+
+      let errors = [];
+
+      // Check first name and last name
+      if (!/^[a-zA-Z]+$/.test(firstName) || !/^[a-zA-Z]+$/.test(lastName)) {
+        errors.push('First name and last name must only contain letters');
+      }
+
+      // Check birth date
+      const birthDateParts = birthDate.split('-');
+      if (birthDateParts.length !== 3 || isNaN(birthDateParts[0]) || isNaN(birthDateParts[1]) || isNaN(birthDateParts[2])) {
+        errors.push('Invalid birth date format');
+      }
+
+      // Check email
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        errors.push('Invalid email format');
+      }
+
+      // Check confirm email
+      if (email !== confirmEmail) {
+        errors.push('Email and confirm email do not match');
+      }
+
+      // Check password
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d{2,})(?=.*[!@#$%^&*()_+=-{};:"<>,./?]).{8,32}$/;
+      if (!passwordRegex.test(password)) {
+        errors.push('Password must start with a capital letter, have at least two numbers, at least one special character, and be between 8 and 32 characters long');
+      }
+
+      // Check confirm password
+      if (password !== confirmPassword) {
+        errors.push('Password and confirm password do not match');
+      }
+
+      // Check mobile number
+      if (mobileNumber.length !== 10 || isNaN(mobileNumber)) {
+        errors.push('Mobile number must be 10 digits long');
+      }
+
+      if (errors.length > 0) {
+        errorMessages.innerHTML = '';
+        errors.forEach((error) => {
+          const errorElement = document.createElement('div');
+          errorElement.className = 'error';
+          errorElement.textContent = error;
+          errorMessages.appendChild(errorElement);
+        });
+      } else {
+        // Registration successful, store data in local storage
+        const userData = {
+          firstName,
+          lastName,
+          birthDate,
+          email,
+          password,
+          mobileNumber
+        };
+
+        localStorage.setItem('userData', JSON.stringify(userData));
+
+        alert('Registration successful!');
+      }
+    });
+  </script>
+</body>
+</html>

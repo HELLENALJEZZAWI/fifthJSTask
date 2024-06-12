@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Animation</title>
+</head>
+<style>
+    .box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.changing {
+  animation: colorchange 2s;
+}
+
+@keyframes colorchange {
+  0% {
+    background: yellow;
+  }
+  100% {
+    background: blue;
+  }
+}
+</style>
+<body>
+    <div class="box"></div>
+    <br>
+    <button class="runButton">Click me to run the animation</button>
+    <script>
+        const box = document.querySelector('.box');
+const runButton = document.querySelector('.runButton');
+
+runButton.addEventListener('click', () => {
+  box.classList.add('changing');
+  setTimeout(() => {
+    box.classList.remove('changing');
+  }, 2000); 
+});
+    </script>
+</body>
+
+</html>

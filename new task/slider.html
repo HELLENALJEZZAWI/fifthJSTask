@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <link rel="stylesheet" href="css/style1.css">
+    <script src="https://kit.fontawesome.com/f282857589.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="images">
+            <img src="img/OIP (1).jpg" >
+            <img src="img/OIP.jpg" >
+            <img src="img/R (1).jpg" >
+            <img src="img/R (1).jpg" >
+            <img src="img/R (2).jpg" >
+        </div>
+        <div onclick="side_slide(-1)" class="slide left">
+             <span class="fas fa-angle-left"></span>
+        </div>
+        <div onclick="side_slide(1)" class="slide right">
+            <span class="fas fa-angle-right"></span>
+       </div>
+    
+        <div class="btm-sliders">
+            <span onclick="btm_slide(1)"></span>
+            <span onclick="btm_slide(2)"></span>
+            <span onclick="btm_slide(3)"></span>
+            <span onclick="btm_slide(4)"></span>
+            <span onclick="btm_slide(5)"></span>
+
+        </div>
+    </div>
+    <script >
+        var indexValue = 1;
+showImg(indexValue);
+function btm_slide(e){showImg(indexValue = e);}
+function side_slide(e){showImg(indexValue += e);}
+function showImg(e){
+    var i;
+    const img = document.querySelectorAll('img');
+    const sliders = document.querySelectorAll('.btm-sliders span');
+    if(e> img.length){indexValue=1}
+    if(e < 1){indexValue=img.length}
+    for(i=0; i<img.length; i++){
+        img[i].style.display="none";
+    }
+    img[indexValue-1].style.display="block";
+
+}
+
+    </script>
+</body>
+</html>
