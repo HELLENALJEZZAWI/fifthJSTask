@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Storage Login Form</title>
+    <style>
+     
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      span{
+        border: solid;
+        width: 100%;
+        color: blue;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="login-form" id="loginFormContainer">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="email" id="password" placeholder="email" required />
+
+        <input type="submit" value="add" />
+      </form>
+      <div id="current-info">
+        
+      </div>
+      <hr>
+      <table id="added-info">
+        <tr>
+          <th>Name</th>
+          <th>Password</th>
+        </tr>
+      </table>
+     
+    </div>
+
+    <script src="./copy.js"></script>
+  </body>
+</html>
